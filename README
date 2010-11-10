@@ -1,4 +1,4 @@
-Script to clean dirty files. It removes empty rows and non-alphanumeric characters from selected columns or the whole file
+Script to clean dirty files. It removes empty rows, rows with wrong attribute number and non-alphanumeric characters from selected columns or the whole file.
 
 Use:
 python cleandirtyf.py ifilename   
