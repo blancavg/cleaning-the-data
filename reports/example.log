@@ -1,0 +1,5 @@
+2010-11-10 14:20:04,021	 - DEBUG	 - debug message
+2010-11-10 14:20:04,022	 - INFO	 - Atributos
+2010-11-10 14:20:04,022	 - WARNING	 - warn message
+2010-11-10 14:20:04,022	 - ERROR	 - error message
+2010-11-10 14:20:04,022	 - CRITICAL	 - critical message
