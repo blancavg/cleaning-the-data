@@ -1,12 +1,12 @@
-Script to clean dirty files. It removes empty rows, rows with wrong attribute 
+Script to clean dirty files. It removes empty rows, rows with wrong attribute
 number and non-alphanumeric characters from selected columns or the whole file.
 
 Use:
-python cleandirtyf.py ifilename   
+python cleandirtyf.py ifilename
 
 optional arguments:
-  -h, --help  show this help message and exit
-  -c COLUMNS  Add repeated values to a list
+  -h, --help show this help message and exit
+  -c COLUMNS Add repeated values to a list
 
 Input: a dirty cvs file
 Output: a cvs file without empty rows and non-alphanumeric characters
