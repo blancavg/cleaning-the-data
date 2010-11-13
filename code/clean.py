@@ -9,8 +9,8 @@
 
 import re
 
-ifile = open("/home/blanca/cenidpd/datanalysis/books/data/foo.txt", "r")
-ofile = open("/home/blanca/cenidpd/datanalysis/books/data/newfoo.txt", "w")
+ifile = open("/home/blanca/cenidpd/cleaning-the-data/data/foo.txt", "r")
+ofile = open("/home/blanca/cenidpd/cleaning-the-data/data/newfoo.txt", "w")
 print "Name of the input file: ", ifile.name
 lcount = 0
 attcount = 0
@@ -23,9 +23,13 @@ for line in ifile:
         attnumber = len(row)
     if lcount > 0:
         while(attcount < attnumber): 
-            m = re.sub('\W','',row[attcount]) #clean data
-            newrow.append(m)
-            print "dirty: ",row[attcount],"\tclean: ",m           
+            cadena = ' '.join(row[attcount].split()) # replace multiple spaces with one
+            print "cadena = ",cadena
+            tmp = re.sub(r'[^a-zA-Z0-9: ]', '', cadena) # remove all non-alphan chars but semicolon and single space
+            print "tmp = ",tmp
+            #m = re.sub('\W','',row[attcount]) #clean data
+            newrow.append(tmp)
+            print "dirty: ",row[attcount],"\tclean: ",tmp           
             attcount = attcount + 1
     lcount = 1
     attcount = 0
