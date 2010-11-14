@@ -87,7 +87,7 @@ def out(INFILE,allrows,empty,longer,longerow,shorter,shorterow,dirty):
         print "OK: Report file created"
         logger.info("OK: Report file created")   
 
-    # create csv file
+    # create a csv file
     try:
         csvreport = open(CSVREPORT, "w")
     except IOError:
