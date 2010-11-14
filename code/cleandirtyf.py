@@ -3,12 +3,9 @@
 ### File:	cleandirtyf.py
 ### Author:	Blanca A. Vargas-Govea
 ### Email:	blanca.vg@gmail.com
-<<<<<<< HEAD
 ### Input:      raw data file
 ### Output:     A cleaned data file, a report,
 ###             and a CSV file
-=======
->>>>>>> 8c01003d131526cee660502c5ee811b8fcd40f0d
 ### ./cleandirtyf.py foo.txt
 ### ./cleandirtyf.py foo.txt -s ";"
 ### ./cleandirtyf.py foo.txt -c 0,1
@@ -73,7 +70,6 @@ def cleanav(attval,cleanrow):
     return cleanrow
 
 def out(INFILE,allrows,empty,longer,longerow,shorter,shorterow,dirty):
-<<<<<<< HEAD
     REPORT = "../reports/rep_"+INFILE
     CSVREPORT = "../data/rep_"+INFILE
     # create report file (friendly readable)
@@ -100,14 +96,11 @@ def out(INFILE,allrows,empty,longer,longerow,shorter,shorterow,dirty):
     usefulrows = allrows - empty - longer - shorter
     removed = empty + longer + shorter
     pcgusefulrows = (usefulrows*100)/allrows
-=======
->>>>>>> 8c01003d131526cee660502c5ee811b8fcd40f0d
     print "===== Input file (before cleaning) = ",INFILE
     print "Examples = ",allrows 
     print "Empty rows (removed) = ",empty
     print "Longer rows (removed) = ",longer
     print "Shorter rows (removed) = ",shorter
-<<<<<<< HEAD
     print "Removed rows = ",removed
     print "Dirty values (cleaned) = ", dirty
     print "===== Output file (after cleaning)"
@@ -135,27 +128,6 @@ def out(INFILE,allrows,empty,longer,longerow,shorter,shorterow,dirty):
     return
 
 def clean(arglist):
-=======
-    print "Dirty values (cleaned) = ", dirty
-    print "===== Output file (after cleaning)"
-    allrows = allrows - 1 # without the header
-    usefulrows = allrows - empty - longer - shorter
-    print "Useful rows = ",usefulrows
-    usefulrows = (usefulrows*100)/allrows
-    print "Useful file = ",usefulrows,"%"
-    logger.info("===== Input file (before cleaning) = "+INFILE)
-    logger.info("Examples = "+str(allrows))
-    logger.info("Empty rows (removed) = "+str(empty))
-    logger.info("Longer rows (removed) = "+str(longer)+" Rows = "+str(longerow))
-    logger.info("Shorter rows (removed) = "+str(shorter)+" Rows = "+str(shorterow))
-    logger.info("Dirty values (cleaned) = "+str(dirty))
-    logger.info("===== Output file (after cleaning)")
-    logger.info("Useful rows = "+str(usefulrows))
-    logger.info("Useful file = "+str(usefulrows)+"%")
-    return
-
-def clean():
->>>>>>> 8c01003d131526cee660502c5ee811b8fcd40f0d
     "Clean dirty file"
     dirtyf = arglist.pop()
     separator = arglist.pop()
@@ -169,12 +141,10 @@ def clean():
     try:
         ifile = open(INFILE, "r")
     except IOError:
-        print "Error: can\'t find file or read data"
         logger.error("Error: can\'t find file or read data")
         sys.exit("Error: can\'t find file or read data")
     else:
         logger.info("OK: opening file")
-<<<<<<< HEAD
     try:
         ofile = open(OUTFILE, "w")
     except IOError:
@@ -183,9 +153,6 @@ def clean():
     else:
         print "OK: Cleaned file created"
         logger.info("OK: Cleaned file created") 
-=======
-    ofile = open(OUTFILE, "w")
->>>>>>> 8c01003d131526cee660502c5ee811b8fcd40f0d
     lcount = 0
     attcount = 0
     newrow = []
@@ -235,7 +202,6 @@ def clean():
     out(dirtyf,lcount,empty,longer,longerow,shorter,shorterow,dirty)
     return
     
-<<<<<<< HEAD
 def main():
     start = time.clock()
     arglist = parse()
@@ -248,10 +214,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-=======
-start = time.clock()
-clean()
-elapsed = (time.clock() - start)
-print "Elapsed time: ",elapsed
-logger.info("Elapsed time: "+str(elapsed))
->>>>>>> 8c01003d131526cee660502c5ee811b8fcd40f0d
