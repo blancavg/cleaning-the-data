@@ -18,7 +18,6 @@
 ### along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
-
 import sys
 import re
 import argparse
@@ -64,11 +63,11 @@ def parse():
     print "Arglist",arglist
     return arglist
 
-def cleanav(attval,cleanrow):
+def cleanav(pattern,attval,cleanrow):
     "Clean a string"
     singlesp = ' '.join(attval.split()) # replace multiple single
     # remove all non-alphan chars but semicolon and single spaces
-    m = re.sub(r'[^a-zA-Z0-9: ]', '', singlesp) 
+    m = pattern.sub('',singlesp)
     cleanrow.append(m)
     logger.debug("dirty: "+attval+"\tclean: "+m)
     logger.debug("cleanrow = " + str(cleanrow))
@@ -123,8 +122,8 @@ def out(INFILE,allrows,empty,longer,longerow,shorter,shorterow,dirty):
     hreport.write("Useful rows = "+str(usefulrows+1)+"\n")
     hreport.write("Useful file = "+str(pcgusefulrows)+"%"+"\n")
     ########## write to csv 
-    csvreport.write("raw,emptyl,long,short,removed,dirtych,usfl,pcgusfl\n")
-    csvreport.write(str(allrows)+","+str(empty)+","+str(longer)+","+str(shorter)+","+str(removed)+","+str(dirty)+","+str(usefulrows+1)+","+str(pcgusefulrows)+"\n")
+    csvreport.write("file,raw,emptyl,long,short,removed,dirtych,usfl,pcgusfl\n")
+    csvreport.write(INFILE+","+str(allrows)+","+str(empty)+","+str(longer)+","+str(shorter)+","+str(removed)+","+str(dirty)+","+str(usefulrows+1)+","+str(pcgusefulrows)+"\n")
     ########## write to logger
     logger.debug("Longer rows (removed) = "+str(longer)+" Rows = "+str(longerow)+"\n")
     logger.debug("Shorter rows (removed) = "+str(shorter)+" Rows = "+str(shorterow)+"\n")
@@ -134,6 +133,7 @@ def out(INFILE,allrows,empty,longer,longerow,shorter,shorterow,dirty):
 
 def clean(arglist):
     "Clean dirty file"
+    pattern = re.compile('[^a-zA-Z0-9: ]')
     dirtyf = arglist.pop()
     separator = arglist.pop()
     colist = []
@@ -169,7 +169,7 @@ def clean(arglist):
     longerow = []
     shorterow = [] 
     for line in ifile:
-        print "..."
+        print lcount
         row = line.rstrip() # remove trailing chars
         row = row.split(separator); # row is a list: row[0],row[1]    
         if lcount == 0:
@@ -190,14 +190,15 @@ def clean(arglist):
         if writetofile:
             if not colist:
                 for attval in row:
-                    newrow = cleanav(attval,newrow)
+                    newrow = cleanav(pattern,attval,newrow)
                     dirty = dirty + 1
             else:
                 for attval in colist:
-                    newrow = cleanav(row[attval],newrow)
+                    newrow = cleanav(pattern,row[attval],newrow)
                     dirty = dirty + 1
             s = ",".join(newrow)+'\n' # to string
             ofile.write(s) 
+            ifile.flush()
         writetofile = True                     
         lcount = lcount + 1
         attcount = 0
